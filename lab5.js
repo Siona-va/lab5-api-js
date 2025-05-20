@@ -1,12 +1,10 @@
-// === КРОК 1: ВСТАВ СВОЇ КЛЮЧІ ===
 const fs = require('fs');
 const openCageApiKey = '40c15ded079740a29d4d9b562bbc94a9';
 const geoapifyKey = 'aef46db442dd473e9f327bb434b91919';
 
-// === КРОК 2: АДРЕСА, ЯКУ ХОЧЕШ ЗНАЙТИ ===
 const address = 'вулиця Хрещатик 1, Київ, Україна';
 
-// === КРОК 3: Отримати координати через OpenCage ===
+// Отримання координатів через OpenCage 
 const geoUrl = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(address)}&key=${openCageApiKey}`;
 
 const results = [];
@@ -21,7 +19,7 @@ fetch(geoUrl)
       console.log(`  Широта: ${lat}`);
       console.log(`  Довгота: ${lon}`);
 
-      // === КРОК 4: Пошук ресторанів через Geoapify ===
+      // Пошук ресторанів через Geoapify 
       const geoapifyUrl = `https://api.geoapify.com/v2/places?categories=catering.restaurant&filter=circle:${lon},${lat},2000&bias=proximity:${lon},${lat}&limit=10&apiKey=${geoapifyKey}`;
       return fetch(geoapifyUrl);
     } else {
